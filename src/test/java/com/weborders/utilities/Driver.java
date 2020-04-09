@@ -15,7 +15,7 @@ public class Driver {
     //ThreadLocal<WebDriver> driverPool = new ThreadLocal<>(); =>  java will create clone of driver per thread
     //get() object of current thread
     //webdriver object wrapped by threadLocal
-    //now we can run 3 test parallel, at the same time !
+    //now we can run 3 test parallel, at the same time!!
     //it runs one thread per CPU core
     //thread : there is some program, some actions happens, some task is getting executed
     //if you have 1 thread : you can execute only ==> tests one by one not same time
