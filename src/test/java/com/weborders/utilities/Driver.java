@@ -15,7 +15,8 @@ public class Driver {
     //ThreadLocal<WebDriver> driverPool = new ThreadLocal<>(); =>  java will create clone of driver per thread
     //get() object of current thread
     //webdriver object wrapped by threadLocal
-    //
+    //now we can run 3 test parallel, at the same time !
+
 
     //so no one can create object of Driver class
     //everyone should call static getter method instead
@@ -23,7 +24,7 @@ public class Driver {
 
     }
 
-    public static WebDriver getDriver() {
+    public synchronized static WebDriver getDriver() {
         //if webdriver object doesn't exist
         //create it
         if (driverPool.get() == null) {
