@@ -23,7 +23,7 @@ public class SmokeTest extends AbstractBaseTest {
         extentTest.pass(component + " verified!");
     }
 
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = true) //to execute all tests in parallel
     public Object[][] smokeTestData() {
         return new Object[][]{
                 {"View all orders", "List of All Orders"},
