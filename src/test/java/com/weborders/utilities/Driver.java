@@ -79,6 +79,39 @@ public class Driver {
         return driverPool.get();
     }
 
+    //synchronized makes method thread safe,it ensures that only 1 thread can use it at the time
+    //thread safety reduces performance but it makes everything safe/
+    public synchronized static WebDriver getDriver(String browser) {
+        //if webdriver object doesn't exist
+        //create it
+        if (driverPool.get() == null) {
+            //specify browser type in configuration.properties file
+
+            switch (browser) {
+                case "chrome":
+                    WebDriverManager.chromedriver().version("79").setup();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--start-maximized");
+                    driverPool.set(new ChromeDriver(chromeOptions));
+                    break;
+                case "chromeheadless":
+                    //to run chrome without interface (headless mode)
+                    WebDriverManager.chromedriver().version("79").setup();
+                    ChromeOptions options = new ChromeOptions();
+                    options.setHeadless(true);
+                    driverPool.set(new ChromeDriver(options));
+                    break;
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    driverPool.set(new FirefoxDriver());
+                    break;
+                default:
+                    throw new RuntimeException("Wrong browser name!");
+            }
+        }
+        return driverPool.get();
+    }
+
     public static void closeDriver() {
         if (driverPool != null) {
             driverPool.get().quit();
